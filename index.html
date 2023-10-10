@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Website Coming Soon</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+  </head>
+  <body>
+    <div class="container">
+      <img src="images/logo.png" class="logo">
+
+      <div class="content">
+        <p>Wait for Jan 1, 2024.</p>
+        <h1>We're <span>Launching</span> Soon!</h1>
+
+        <div class="launch-time">
+          <div>
+            <p id="days">00</p>
+            <span>Days</span>
+          </div>
+          <div>
+            <p id="hours">00</p>
+            <span>Hours</span>
+          </div>
+          <div>
+            <p id="minutes">00</p>
+            <span>Minutes</span>
+          </div>
+          <div>
+            <p id="seconds">00</p>
+            <span>Seconds</span>
+          </div>
+        </div>
+
+        <button type="button" name="button">Celebrate <img src="images/triangle.png" alt=""></button>
+      </div>
+
+      <img src="images/rocket.png" class="rocket" id="rocket">
+      <img src="images/rocket.png" class="rocket hide" id="rocket2">
+
+    </div>
+    <script>
+      var countDownDate = new Date("Jan 1, 2024 00:00:00").getTime();
+      var x = setInterval(function () {
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerHTML = days;
+        document.getElementById('hours').innerHTML = hours;
+        document.getElementById('minutes').innerHTML = minutes;
+        document.getElementById('seconds').innerHTML = seconds;
+
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById('days').innerHTML = "00";
+          document.getElementById('hours').innerHTML = "00";
+          document.getElementById('minutes').innerHTML = "00";
+          document.getElementById('seconds').innerHTML = "00";
+
+          document.querySelector('h1').innerHTML = "Happy New Year <span>2024</span>!";
+          var pElement = document.querySelector('p');
+          pElement.parentNode.removeChild(pElement);
+        }
+
+        document.querySelector('button').addEventListener('click', function () {
+          if (distance < 0) {
+            var rocketImage = document.getElementById('rocket');
+            rocketImage.src = "images/balloon.png";
+
+            var rocketImage2 = document.getElementById('rocket2');
+            rocketImage2.style.display = "block";
+            rocketImage2.src = "images/balloon.png";
+
+            this.style.display = 'none';
+          }
+        });
+      }, 1000);
+    </script>
+  </body>
+</html>
